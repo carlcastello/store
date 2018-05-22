@@ -1,3 +1,4 @@
 source env/bin/activate
 export FLASK_APP=store.py
 export FLASK_CONFIG=testing
+FLASK_DEBUG=1

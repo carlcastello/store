@@ -4,10 +4,9 @@ from flask_restful import Resource
 import re
 
 class ResourceBase(Resource):
-
-    _json = _format_json(request.get_json())
-
-    def _format_json(self, json: dict) -> dict:
+    
+    def _get_json(self) -> dict:
+        json = request.get_json()
         camel_pattern = re.compile(r'([A-Z])')
         return {
             camel_pattern.sub(lambda x: '_' + x.group(1).lower(), key): value 
@@ -15,17 +14,17 @@ class ResourceBase(Resource):
         }
 
 class Store(ResourceBase):
-    
-    def put(self):
-        pass
 
-    def post(self):
-        pass
+    def put(self, id):
+        print(id)
+
+    def post(self, id):
+        print(id)
 
 class Employee(ResourceBase):
 
-    def put(self):
+    def put(self, id):
         pass
 
-    def post(self):
+    def post(self, id):
         pass
