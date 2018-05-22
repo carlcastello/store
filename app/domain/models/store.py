@@ -1,5 +1,6 @@
 from app.domain.enums import EmployeeEnum
 
+
 class Store:
     def __init__(self, 
                  id: str, 
@@ -14,8 +15,6 @@ class Store:
 class Employee:
     def __init__(self,
                  id: str,
-                 full_name: str,
                  type: EmployeeEnum):
         self._id = id
-        self._full_name = full_name
         self._type = type
