@@ -1,11 +1,12 @@
 from app.domain.enums import EmployeeEnum
+from app.domain.models.common import Address
 
 
 class Store:
     def __init__(self, 
                  id: str, 
                  name: str, 
-                 address: str,
+                 address: Address,
                  employees: list):
         self._id = id
         self._name = name

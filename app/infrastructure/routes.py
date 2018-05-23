@@ -8,7 +8,12 @@ ROUTES_BP = Blueprint('api', __name__)
 API = Api(ROUTES_BP, errors=ERRORS)
 
 API.add_resource(Store,
-                 "/store/<string:id>")
+                 "/store",
+                 endpoint="CreateStore")
+
+API.add_resource(Store,
+                 "/store/<string:id>",
+                 endpoint='UpdateStore')
 
 API.add_resource(Employee,
                  "/employee/<string:id>")

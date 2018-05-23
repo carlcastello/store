@@ -3,28 +3,57 @@ from flask_restful import Resource
 
 import re
 
-class ResourceBase(Resource):
-    
-    def _get_json(self) -> dict:
-        json = request.get_json()
-        camel_pattern = re.compile(r'([A-Z])')
-        return {
-            camel_pattern.sub(lambda x: '_' + x.group(1).lower(), key): value 
-            for key, value in json
-        }
+from app.api.parsers.inbound import CreateStoreSchema
 
-class Store(ResourceBase):
+class Store(Resource):
 
-    def put(self, id):
+    def put(self, id: str) -> dict:
+        """
+            Updates Store
+
+            :param id:
+                None
+            :return:
+                Newly updated Store
+            :raises:
+                No Id Exception
+        """
         print(id)
 
-    def post(self, id):
+    def post(self, id: str = None) -> dict:
+        """
+            Creates Store
+
+            :param id:
+                None
+            :return:
+                Newly Created Store
+        """
+        new_store = CreateStoreSchema().load(request.get_json())
+
+
+class Employee(Resource):
+
+    def put(self, id: str) -> dict:
+        """
+            Updates Employee
+
+            :param id:
+                None
+            :return:
+                Newly Created Employee
+            :raises:
+                No Id Exception
+        """
         print(id)
 
-class Employee(ResourceBase):
+    def post(self, id: str) -> dict:
+        """
+            Creates Employee
 
-    def put(self, id):
-        pass
-
-    def post(self, id):
-        pass
+            :param id:
+                None
+            :return:
+                Newly Created Employee
+        """
+        print(id)

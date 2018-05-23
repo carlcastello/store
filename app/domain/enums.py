@@ -12,3 +12,5 @@ class EmployeeEnum(BaseEnum):
     SUPERVISOR = 2
     EMPLOYEE = 3
     
+class CountryEnum(BaseEnum):
+    CAN = 1
