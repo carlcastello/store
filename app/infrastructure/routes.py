@@ -7,13 +7,12 @@ from app.api.store_api import Store, Employee
 ROUTES_BP = Blueprint('api', __name__)
 API = Api(ROUTES_BP, errors=ERRORS)
 
-API.add_resource(Store,
-                 "/store",
-                 endpoint="CreateStore")
+store_service = "123"
 
 API.add_resource(Store,
+                 "/store",                 
                  "/store/<string:id>",
-                 endpoint='UpdateStore')
+                 resource_class_kwargs={'service': store_service})
 
 API.add_resource(Employee,
                  "/employee/<string:id>")

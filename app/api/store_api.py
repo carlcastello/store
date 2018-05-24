@@ -3,9 +3,12 @@ from flask_restful import Resource
 
 import re
 
-from app.api.parsers.inbound import CreateStoreSchema
+from app.api.parsers.inbound import CreateStoreSchema, UpdateStoreSchema
 
 class Store(Resource):
+
+    def __init__(self, service: str):
+        self._service = service
 
     def put(self, id: str) -> dict:
         """
@@ -18,7 +21,8 @@ class Store(Resource):
             :raises:
                 No Id Exception
         """
-        print(id)
+        new_store = UpdateStoreSchema().load(request.get_json())
+
 
     def post(self, id: str = None) -> dict:
         """
@@ -30,7 +34,7 @@ class Store(Resource):
                 Newly Created Store
         """
         new_store = CreateStoreSchema().load(request.get_json())
-
+        print(self._service)        
 
 class Employee(Resource):
 
