@@ -1,8 +1,10 @@
 from app.domain.enums import EmployeeEnum, StoreEnum
 from app.domain.models.common import Address
+from app.domain.models.users import User
 
 
 class Store:
+
     def __init__(self, 
                  id: str, 
                  name: str,
@@ -16,6 +18,7 @@ class Store:
         self._employees = employees
 
 class UpdateStore:
+    
     def __init__(self,
                  name: str,
                  store_type: StoreEnum,
@@ -27,8 +30,13 @@ class UpdateStore:
         self._address = address
 
 class Employee:
+    
     def __init__(self,
                  id: str,
-                 type: EmployeeEnum):
+                 eployee_type: EmployeeEnum,
+                 user: User,
+                 documents: list):
         self._id = id
-        self._type = type
+        self._type = eployee_type
+        self._user = user
+        self._documents = documents

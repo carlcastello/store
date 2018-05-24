@@ -11,6 +11,11 @@ class EmployeeEnum(BaseEnum):
     SUPERVISOR = 2
     EMPLOYEE = 3
 
+class UserEnum(BaseEnum):
+    OWNER = 1
+    EMPLOYEE = 2
+    ADMIN = 3
+
 class StoreEnum(BaseEnum):
     RETAIL = 1
 
