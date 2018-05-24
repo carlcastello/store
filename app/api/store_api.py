@@ -1,13 +1,13 @@
 from flask import request
 from flask_restful import Resource
 
-import re
-
+from app.exceptions import NoIdException
 from app.api.parsers.inbound import CreateStoreSchema, UpdateStoreSchema
+from app.domain.service import StoreService
 
 class Store(Resource):
 
-    def __init__(self, service: str):
+    def __init__(self, service: StoreService):
         self._service = service
 
     def put(self, id: str) -> dict:
@@ -21,8 +21,11 @@ class Store(Resource):
             :raises:
                 No Id Exception
         """
-        new_store = UpdateStoreSchema().load(request.get_json())
-
+        if not id:
+            raise NoIdException()
+        
+        new_store_info = UpdateStoreSchema().load(request.get_json())
+        self._service.update_store(id, new_store_info)
 
     def post(self, id: str = None) -> dict:
         """
@@ -34,13 +37,16 @@ class Store(Resource):
                 Newly Created Store
         """
         new_store = CreateStoreSchema().load(request.get_json())
-        print(self._service)        
-
+        self._service.create_store(new_store)
+    
 class Employee(Resource):
+
+    def __init__(self, service: StoreService):
+        self._service = service
 
     def put(self, id: str) -> dict:
         """
-            Updates Employee
+            Updates Employee's store info
 
             :param id:
                 None
@@ -49,15 +55,5 @@ class Employee(Resource):
             :raises:
                 No Id Exception
         """
-        print(id)
-
-    def post(self, id: str) -> dict:
-        """
-            Creates Employee
-
-            :param id:
-                None
-            :return:
-                Newly Created Employee
-        """
-        print(id)
+        if not id:
+            raise NoIdException()

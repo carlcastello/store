@@ -13,7 +13,7 @@ def create_app(config_name):
 
     DATABASE.init_app(flask_app)
 
-    from .infrastructure.routes import ROUTES_BP
-    flask_app.register_blueprint(ROUTES_BP)
+    from .infrastructure.roots import get_routes_bp
+    flask_app.register_blueprint(get_routes_bp())
 
     return flask_app
