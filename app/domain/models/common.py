@@ -13,11 +13,3 @@ class Address:
         self._province = province
         self._country = country
         self._postal_code = postal_code
-    
-class ContactInfo:
-
-    def __init__(self, 
-                 emails: list,
-                 phone_numbers: list):
-        self._emails = emails
-        self._phone_numbers = phone_numbers

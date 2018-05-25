@@ -1,4 +1,4 @@
-from app.domain.models.stores import Store, UpdateStore
+from app.domain.models.stores import Store, UpdateStore, Employee, UpdateEmployee
 
 class StoreService:
 
@@ -6,7 +6,13 @@ class StoreService:
         pass
 
     def create_store(self, new_store: Store) -> Store:
-        pass
+        return None
 
     def update_store(self, new_store_info: UpdateStore) -> Store:
+        return None
+
+    def update_employee(self, new_employee_info: UpdateEmployee) -> Employee:
+        return None
+    
+    def create_employee(self, new_employee: Employee) -> Employee:
         return None

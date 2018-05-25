@@ -10,6 +10,8 @@ class EmployeeEnum(BaseEnum):
     MANAGER = 1
     SUPERVISOR = 2
     EMPLOYEE = 3
+    FIRED = 4
+    QUIT = 5
 
 class UserEnum(BaseEnum):
     OWNER = 1

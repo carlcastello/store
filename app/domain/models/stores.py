@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app.domain.enums import EmployeeEnum, StoreEnum
 from app.domain.models.common import Address
 from app.domain.models.users import User
@@ -33,10 +35,22 @@ class Employee:
     
     def __init__(self,
                  id: str,
-                 eployee_type: EmployeeEnum,
+                 employee_type: EmployeeEnum,
                  user: User,
-                 documents: list):
+                 documents: list,
+                 starting_date: datetime,
+                 ending_date: datetime):
         self._id = id
-        self._type = eployee_type
+        self._employee_type = employee_type
         self._user = user
         self._documents = documents
+        self._starting_date = starting_date
+        self._ending_date = ending_date
+
+class UpdateEmployee:
+    
+    def __init__(self,             
+                 employee_type: EmployeeEnum,
+                 user: User):
+        self._employee_type = employee_type
+        self._user = user
