@@ -5,7 +5,7 @@ import simplejson as json
 
 from app import create_app
 from app.domain.enums import ProvinceEnum, CountryEnum, UserEnum, EmployeeEnum
-from app.domain.service import StoreService
+from app.domain.service import StoreService, UserService
 
 class StoreTest(TestCase):
     
@@ -96,4 +96,42 @@ class EmployeeTest(TestCase):
                                     content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(update_employee.called, True)
+
+
+class UserTest(TestCase):
+    
+    def setUp(self):
+        self.app = create_app('testing')
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.client = self.app.test_client()
+        self.user_data = {
+            'first_name': str(uuid4()),
+            'last_name': str(uuid4()),
+            'user_type': choice(list(UserEnum)).name,
+            'username': str(uuid4()),
+            'address': {
+                'address': str(uuid4()),
+                'city': str(uuid4()),
+                'province': choice(list(ProvinceEnum)).name,
+                'country': choice(list(CountryEnum)).name,
+                'postal_code': str(uuid4())
+            }, 
+            'contact_info': {
+                'emails': [],
+                'phone_numbers': []
+            }
+        }
+
+    def tearDown(self):
+        self.app_context.pop()
+    
+    @mock.patch.object(UserService, 'update_user')
+    def test_put(self, update_user):
+        update_user.return_value = {}
+        response = self.client.put('/user/' + str(uuid4()),
+                                    data=json.dumps(self.user_data),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(update_user.called, True)
 
