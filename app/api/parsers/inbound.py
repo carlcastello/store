@@ -4,39 +4,12 @@ from datetime import datetime
 from marshmallow import Schema, post_load
 from marshmallow.fields import String, Nested, Raw, List
 
+from app.api.parsers.common import AddressSchema, ContactInfoSchema
 from app.domain.enums import StoreEnum, UserEnum, CountryEnum, EmployeeEnum, ProvinceEnum
-from app.domain.models.common import Address
+from app.domain.models.info import Address, ContactInfo
 from app.domain.models.stores import Store, UpdateStore, Employee, UpdateEmployee
-from app.domain.models.users import User, UpdateUser, ContactInfo
+from app.domain.models.users import User, UpdateUser
 
-
-class AddressSchema(Schema):
-    address = String(required=True)
-    city = String(required=True)
-    province = String(required=True)
-    country = String(required=True)
-    postal_code = String(required=True)
-
-    @post_load
-    def to_model(self, data: dict) -> Address:
-        return Address(
-            address=data.get('address', None),
-            city=data.get('city', None),
-            province=ProvinceEnum[data.get('province', None)],
-            country=CountryEnum[data.get('country', None)],
-            postal_code=data.get('postal_code', None)   
-        )
-
-class ContactInfoSchema(Schema):
-    emails = List(String())
-    phone_numbers = List(String())
-
-    @post_load
-    def to_model(self, data: dict) -> ContactInfo:
-        return ContactInfo(
-            emails=data.get('emails', []),
-            phone_numbers=data.get('phone_numbers', [])
-        )
 
 class CreateStoreSchema(Schema):
     name = String(required=True)

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from app.domain.enums import EmployeeEnum, StoreEnum
-from app.domain.models.common import Address
+from app.domain.models.info import Address
 from app.domain.models.users import User
 
 

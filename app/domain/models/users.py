@@ -1,14 +1,5 @@
 from app.domain.enums import UserEnum
-from app.domain.models.common import Address
-
-
-class ContactInfo:
-
-    def __init__(self, 
-                 emails: list,
-                 phone_numbers: list):
-        self._emails = emails
-        self._phone_numbers = phone_numbers
+from app.domain.models.info import Address, ContactInfo
 
 class User:
     
