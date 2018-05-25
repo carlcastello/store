@@ -47,7 +47,7 @@ class Employee(Resource):
     def __init__(self, service: StoreService):
         self._service = service
 
-    def put(self, id: str) -> dict:
+    def put(self, store_id: str, employee_id: str) -> dict:
         """
             Updates Employee's store info
 
@@ -58,14 +58,14 @@ class Employee(Resource):
             :raises:
                 No Id Exception
         """
-        if not id:
+        if not employee_id:
             raise NoIdException()
 
         new_employee_info = UpdateEmployeeSchema().load(request.get_json())
-        updated_employee = self._service.update_employee(new_employee_info)
+        updated_employee = self._service.update_employee(store_id, employee_id, new_employee_info)
         return updated_employee
 
-    def post(self, id: str = None) -> dict:
+    def post(self, store_id: str = None, employee_id: str = None) -> dict:
         """
             Creates new store Employee and User
 
@@ -77,5 +77,5 @@ class Employee(Resource):
                 No Id Exception
         """
         new_employee = CreateEmployeeSchema().load(request.get_json())
-        created_employee = self._service.create_employee(new_employee)
+        created_employee = self._service.create_employee(store_id, employee_id, new_employee)
         return created_employee

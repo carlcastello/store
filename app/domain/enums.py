@@ -23,3 +23,6 @@ class StoreEnum(BaseEnum):
 
 class CountryEnum(BaseEnum):
     CAN = 1
+
+class ProvinceEnum(BaseEnum):
+    AB = 1

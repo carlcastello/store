@@ -18,8 +18,8 @@ def get_routes_bp():
                      resource_class_kwargs={'service': get_store_service()})
 
     api.add_resource(Employee,
-                     "/employee",
-                     "/employee/<string:id>",
+                     "/store/<string:store_id>/employee",
+                     "/store/<string:store_id>/employee/<string:employee_id>",
                      resource_class_kwargs={'service': get_store_service()})
 
     return routes_bp
