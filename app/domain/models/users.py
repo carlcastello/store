@@ -1,8 +1,10 @@
+from app.domain.models import Domain
 from app.domain.enums import UserEnum
 from app.domain.models.info import Address, ContactInfo
 
-class User:
-    
+
+class User(Domain):
+
     def __init__(self,
                  id: str,
                  first_name: str,
@@ -18,10 +20,13 @@ class User:
         self._user_type = user_type
         self._address = address
         self._contact_info = contact_info
+    
+    def get_id(self):
+        return self._id
+    
+class UpdateUser(Domain):
 
-class UpdateUser:
-
-     def __init__(self,
+    def __init__(self,
                  first_name: str,
                  last_name: str,
                  username: str,

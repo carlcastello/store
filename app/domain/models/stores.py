@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from app.domain.enums import EmployeeEnum, StoreEnum
+from app.domain.models import Domain
 from app.domain.models.info import Address
 from app.domain.models.users import User
 
 
-class Store:
+class Store(Domain):
 
     def __init__(self, 
                  id: str, 
@@ -19,7 +20,7 @@ class Store:
         self._addres = address
         self._employees = employees
 
-class UpdateStore:
+class UpdateStore(Domain):
     
     def __init__(self,
                  name: str,
@@ -31,7 +32,7 @@ class UpdateStore:
         self._phone_number = phone_number
         self._address = address
 
-class Employee:
+class Employee(Domain):
     
     def __init__(self,
                  id: str,
@@ -47,7 +48,7 @@ class Employee:
         self._starting_date = starting_date
         self._ending_date = ending_date
 
-class UpdateEmployee:
+class UpdateEmployee(Domain):
     
     def __init__(self,             
                  employee_type: EmployeeEnum,

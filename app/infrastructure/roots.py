@@ -2,14 +2,18 @@ from flask import Blueprint
 from flask_restful import Api
 
 from app.domain.service import StoreService, UserService
+from app.infrastructure.repository import UserRepository, ChangeLogRepository
 from app.exceptions import ERRORS
 from app.api.store_api import Store, Employee, User
 
 def get_store_service():
-    return StoreService()
+    return StoreService(repository=None)
 
 def get_user_service():
-    return UserService()
+    return UserService(
+        user_repository=UserRepository(), 
+        change_log_repository=ChangeLogRepository()
+    )
 
 def get_routes_bp():
     routes_bp = Blueprint('api', __name__)

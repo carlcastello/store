@@ -1,7 +1,8 @@
-from app.domain.enums import CountryEnum
+from app.domain.models import Domain
+from app.domain.enums import CountryEnum, ChangeLogEnum
 
 
-class ContactInfo:
+class ContactInfo(Domain):
 
     def __init__(self, 
                  emails: list,
@@ -9,7 +10,8 @@ class ContactInfo:
         self._emails = emails
         self._phone_numbers = phone_numbers
 
-class Address:
+
+class Address(Domain):
 
     def __init__(self,
                  address: str,
@@ -22,3 +24,15 @@ class Address:
         self._province = province
         self._country = country
         self._postal_code = postal_code
+
+class ChangeLog(Domain):
+
+    USER_INFO_CHANGED = "User info has changed"
+
+    def __init__(self,
+                 id: str,
+                 change_log_type: ChangeLogEnum,
+                 message: str):
+        self._id = id
+        self._change_log_type = change_log_type
+        self._massage = message
