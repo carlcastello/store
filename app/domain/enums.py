@@ -26,6 +26,3 @@ class CountryEnum(BaseEnum):
 
 class ProvinceEnum(BaseEnum):
     AB = 1
-
-class ChangeLogEnum(BaseEnum):
-    USER_CHANGE_LOG = 1

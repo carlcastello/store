@@ -1,4 +1,5 @@
-from app.domain.enums import ChangeLogEnum
+from uuid import uuid4
+
 from app.domain.models.info import ChangeLog
 from app.domain.models.stores import Store, UpdateStore, Employee, UpdateEmployee
 from app.domain.models.users import User, UpdateUser
@@ -19,7 +20,9 @@ class UserService:
         )
         if user != updated_user:        
             self._user_repository.save_user(updated_user)
-            self._change_log_repository.save_user_change_log(ChangeLog(user.get_id(), ChangeLogEnum.USER_CHANGE_LOG, "Hello"))
+            self._change_log_repository.save_user_change_log(
+                ChangeLog(user.get_id(), ChangeLog.USER_INFO_CHANGED)
+            )
 
 
 class StoreService:

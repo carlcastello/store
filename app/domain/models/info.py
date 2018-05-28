@@ -1,5 +1,5 @@
 from app.domain.models import Domain
-from app.domain.enums import CountryEnum, ChangeLogEnum
+from app.domain.enums import CountryEnum
 
 
 class ContactInfo(Domain):
@@ -31,8 +31,6 @@ class ChangeLog(Domain):
 
     def __init__(self,
                  id: str,
-                 change_log_type: ChangeLogEnum,
                  message: str):
         self._id = id
-        self._change_log_type = change_log_type
         self._massage = message
