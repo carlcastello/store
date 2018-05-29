@@ -7,7 +7,10 @@ from app.exceptions import ERRORS
 from app.api.store_api import Store, Employee, User
 
 def get_store_service():
-    return StoreService(repository=None)
+    return StoreService(
+        store_repository=None,
+        change_log_repository=ChangeLogRepository()
+    )
 
 def get_user_service():
     return UserService(
