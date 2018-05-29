@@ -1,4 +1,5 @@
 from uuid import uuid4
+from datetime import datetime
 
 from app.domain.models.info import ChangeLog
 from app.domain.models.stores import Store, UpdateStore, Employee, UpdateEmployee
@@ -16,22 +17,29 @@ class UserService:
         user = self._user_repository.find_by_id(user_id)
         updated_user = User(
             id=user.get_id(),
+            created_date=user.get_created_date(),
             **new_user_info.to_dict(is_nested=False)
         )
         if user != updated_user:        
             self._user_repository.save_user(updated_user)
             self._change_log_repository.save_user_change_log(
-                ChangeLog(user.get_id(), ChangeLog.USER_INFO_CHANGED)
+                ChangeLog(user.get_id(), ChangeLog.USER_INFO_CHANGED, datetime.now())
             )
+        return updated_user
 
 
 class StoreService:
 
-    def __init__(self, repository):
+    def __init__(self, repository, change_log_repository: ChangeLogRepository):
         self._store_repository = repository
+        self._change_log_repository = change_log_repository
 
     def create_store(self, new_store: Store) -> Store:
-        return None
+        created_store = self._store_repository.save_store(new_store)
+        self._change_log_repository.save_store_change_log(
+            ChangeLog(created_store.get_id(), ChangeLog.STORE_CREATED, created_store.get_created_date())
+        )
+        return created_store
 
     def update_store(self, store_id: str, new_store_info: UpdateStore) -> Store:
         return None

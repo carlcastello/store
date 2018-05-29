@@ -25,7 +25,8 @@ class CreateStoreSchema(Schema):
             store_type=StoreEnum[data.get('store_type', None)],
             phone_number=data.get('phone_number', None),
             address=data.get('address'),
-            employees=[]
+            employees=[],
+            created_date=datetime.now()
         )
 
 class UpdateStoreSchema(Schema):

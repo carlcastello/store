@@ -1,3 +1,6 @@
+from typing import List
+
+from datetime import datetime
 from app.domain.models import Domain
 from app.domain.enums import CountryEnum
 
@@ -5,8 +8,8 @@ from app.domain.enums import CountryEnum
 class ContactInfo(Domain):
 
     def __init__(self, 
-                 emails: list,
-                 phone_numbers: list):
+                 emails: List[str],
+                 phone_numbers: List[str]):
         self._emails = emails
         self._phone_numbers = phone_numbers
 
@@ -27,10 +30,13 @@ class Address(Domain):
 
 class ChangeLog(Domain):
 
-    USER_INFO_CHANGED = "User info has changed"
+    STORE_CREATED = 'Store Created'
+    USER_INFO_CHANGED = 'User info has changed'
 
     def __init__(self,
                  id: str,
-                 message: str):
+                 message: str,
+                 created_date: datetime):
         self._id = id
         self._massage = message
+        self._created_date = created_date
